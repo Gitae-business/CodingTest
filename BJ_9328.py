@@ -38,14 +38,14 @@ def Main():
             if cell == '$':
                 answer += 1
                 board[y][x] = '.'
-            elif 'A' <= cell <= 'Z':  # 문일 경우
+            elif 'A' <= cell <= 'Z':  # 문
                 if key[cell.lower()]:
                     board[y][x] = '.'
                 else:
                     door[cell].append((x, y))
                     continue
-            elif 'a' <= cell <= 'z':  # 열쇠일 경우
-                if not key[cell]:
+            elif 'a' <= cell <= 'z':  # 열쇠
+                if not key[cell]:   # 처음 획득한 경우만
                     key[cell] = True
                     board[y][x] = '.'
 
