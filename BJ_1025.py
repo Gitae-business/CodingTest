@@ -2,23 +2,27 @@
 def main():
     n, m = map(int, input().split())
     board = [input().strip() for _ in range(n)]
-
     answer = -1
 
-    def IsInBoard(x, y):
-        return 0 <= x < m and 0 <= y < n
+    def IsInBoard(y, x):
+        return 0 <= y < n and 0 <= x < m
 
     for sy in range(n):
         for sx in range(m):
-            for dx in range(-n, n):
-                for dy in range(-m, m):
+            val0 = int(board[sy][sx])
+            r0 = int(val0 ** 0.5)
+            if r0 * r0 == val0:
+                answer = max(answer, val0)
+
+            for dy in range(-n + 1, n):
+                for dx in range(-m + 1, m):
                     if dx == 0 and dy == 0:
                         continue
 
                     num = ''
-                    x, y = sx, sy
+                    y, x = sy, sx
 
-                    while IsInBoard(x, y):
+                    while IsInBoard(y, x):
                         num += board[y][x]
                         val = int(num)
                         sqrt = int(val ** 0.5)
@@ -26,8 +30,8 @@ def main():
                         if sqrt * sqrt == val:
                             answer = max(answer, val)
 
-                        x += dx
                         y += dy
+                        x += dx
 
     print(answer)
 
